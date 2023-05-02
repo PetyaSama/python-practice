@@ -470,6 +470,226 @@ print(goods)
 
 -----------------------------------------------------------------------------------------
 
+a = [1, 5, 3]
+b = [1, 5, 1, 5]
+c = [1, 3, 1, 5, 3, 3]
+a.extend(b)
+print("The amount of 5s during the first extension:", a.count(5))
+for i in a:
+    if i == 5:
+        a.remove(i)
+a.extend(c)
+print("The amount of 3s during the second extension:", a.count(3))
+print(a)
+
+-----------------------------------------------------------------------------------------
+line_1 = list(range(160, 176, 2))
+line_2 = list(range(162, 180, 3))
+
+print(line_1)
+print(line_2)
+
+line_1.extend(line_2)
+line_1 = sorted(line_1)
+
+print(line_1)
+
+-----------------------------------------------------------------------------------------
+
+shop = [['каретка', 1200], ['шатун', 1000], ['седло', 300],
+        ['педаль', 100], ['седло', 1500], ['рама', 12000],
+        ['обод', 2000], ['шатун', 200], ['седло', 2700]]
+
+part = input("Enter the spare part that you need: ")
+amount = int(input("Enter the amount of spare parts that you need: "))
+total_price = 0
+same_parts = []
+for i in range(len(shop)):
+        for i_1 in shop[i]:
+                if i_1 == part:
+                        same_parts.append(shop[i])
+
+print("Found spare parts and their prices: ")
+print(same_parts)
+box = 0
+if len(same_parts) > 1:
+        while total_price == 0:
+                query = int(input("Do we look for the cheapest or the most expensive parts? (1 - cheap / 2 - expensive): "))
+                if query == 1:
+                        box = same_parts[0][1]
+                        for i_1 in range(len(same_parts)):
+                                if same_parts[i_1][1] < box:
+                                        box = same_parts[i_1][1]
+                elif query == 2:
+                        box = same_parts[0][1]
+                        for i_1 in range(len(same_parts)):
+                                if same_parts[i_1][1] > box:
+                                        box = same_parts[i_1][1]
+                else:
+                        print("Wrong input")
+                total_price = box * amount
+else:
+        total_price = same_parts[0][1]
+print("The total price is: ", total_price)
+
+-----------------------------------------------------------------------------------------
+
+guests = ['Петя', 'Ваня', 'Саша', 'Лиза', 'Катя']
+guest = ''
+while True:
+    print("There are now", len(guests), "people at the party: ", guests)
+    question = input("The quest have left or have arrived?: ")
+    if question == "arrived":
+        guest = input("Guest's name: ")
+        if len(guests) >= 6:
+            print("Sorry,", guest, ",we've got no space for you" )
+        else:
+            guests.append(guest)
+            print("Welcome,", guest,"!")
+    elif question == "left":
+        guest = input("Guest's name: ")
+        guests.remove(guest)
+        print("Bye,", guest,"!")
+    elif question == "sleeptime":
+        print("\nEveryone is asleep, the party is over")
+        break
+
+-----------------------------------------------------------------------------------------
+
+violator_songs = [
+    ['World in My Eyes', 4.86],
+    ['Sweetest Perfection', 4.43],
+    ['Personal Jesus', 4.56],
+    ['Halo', 4.9],
+    ['Waiting for the Night', 6.07],
+    ['Enjoy the Silence', 4.20],
+    ['Policy of Truth', 4.76],
+    ['Blue Dress', 4.29],
+    ['Clean', 5.83]
+]
+
+amount = int(input("How many songs do you wish to add on your playlist?: "))
+time = 0
+for i in range(amount):
+    print("Enter the", i + 1, "song", end="")
+    name_song = input(": ")
+    for i_1 in range(len(violator_songs)):
+        for i_2 in violator_songs[i_1]:
+            if i_2 == name_song:
+                time += violator_songs[i_1][1]
+
+print("The total time of the songs: ", round(time, 2), "minutes")
+
+-----------------------------------------------------------------------------------------
+
+skates = []
+people = []
+used_skates = 0
+amount_skates = int(input("Enter an amount of skates: "))
+for i in range(amount_skates):
+    print("The size of", i + 1, end="")
+    size_skate = int(input(": "))
+    skates.append(size_skate)
+amount_people = int(input("Enter an amount of people: "))
+for i_1 in range(amount_people):
+    print("The size of", i_1 + 1, end="")
+    size_people = int(input(": "))
+    people.append(size_people)
+
+for i_2 in range(len(people)):
+    for i_3 in skates:
+        if i_3 == people[i_2]:
+            used_skates += 1
+            skates.remove(i_3)
+
+print("The highest amount of people who can get the skates is:", used_skates)
+
+-----------------------------------------------------------------------------------------
+
+amount = int(input("Enter an amount of people: "))
+people_amount = list(range(1, amount + 1))
+print(people_amount)
+number = int(input("Call a number for selection: "))
+print("That means that every", number, "is getting kicked out!")
+box = 0
+while len(people_amount) > 1:
+    print(sorted(people_amount))
+    print("The beginning of the count:", people_amount[0])
+    for i in range(number - 1):
+        people_amount.append(people_amount[i])
+    del people_amount[:number]
+print("The remaining person is with the number: ", people_amount[0])
+
+-----------------------------------------------------------------------------------------
+
+def chk_symetry(n_list):
+    mirror = []
+    for i in range(len(n_list) - 1, -1, -1):
+        mirror.append(n_list[i])
+    if n_list == mirror:
+        return True
+    else:
+        return False
+
+
+amount = int(input("Enter an amount of numbers: "))
+num_list = []
+new_list = []
+requirement = []
+for i in range(amount):
+    num = int(input("Enter a number: "))
+    num_list.append(num)
+
+for i_1 in range(0, len(num_list)):
+    for j in range(i_1, len(num_list)):
+        new_list.append(num_list[j])
+    if chk_symetry(new_list):
+        for solution in range(0, i_1):
+            requirement.append(num_list[solution])
+        requirement.reverse()
+        break
+    new_list = []
+
+print("The initial list is:", num_list)
+print("Required amount of numbers for symmetry:", len(requirement))
+print("The list of those numbers:", requirement)
+num_list.extend(requirement)
+print(num_list)
+
+-----------------------------------------------------------------------------------------
+
+line_1 = []
+line_2 = []
+line_resolved = []
+def sorting(first_list, second_list):
+    combined = []
+    combined.extend(first_list)
+    combined.extend(second_list)
+    for i in range(1, len(combined)):
+        value = combined[i]
+        j = i - 1
+        while j >= 0:
+            if value < combined[j]:
+                combined[j + 1] = combined[j]
+                combined[j] = value
+                j -= 1
+            else:
+                break
+    return combined
+
+
+for j in range(162, 180, 3):
+    line_2.append(j)
+for i in range(160, 176, 2):
+    line_1.append(i)
+
+line_resolved = sorting(line_1, line_2)
+print("Sorted line of pupils:", line_resolved)
+
+-----------------------------------------------------------------------------------------
+
+
+
 
 
 
