@@ -1,0 +1,394 @@
+# MyProfile для предпринимателей app
+
+SEPARATOR = '------------------------------------------'
+
+# user profile
+n = ''
+a = 0
+ph = ''
+e = ''
+i = ''
+# specified info of the user
+enn = ''
+ogrnip = ''
+bank_account = ''
+bank_name = ''
+bik = ''
+post_index = ''
+post_0 = ''
+def check_age(age):
+    formed_age = ''
+    flag_negative = False
+    for i in age:
+        flag = True
+        if i == '-':
+            flag_negative = True
+            break
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_age += i
+    if flag_negative:
+        print('Возраст не может быть отрицательным!')
+        return -1
+    else:
+        return formed_age
+def check_enn(enn):
+    formed_enn = ''
+    for i in enn:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_enn += i
+    counter = 0
+    for i_1 in formed_enn:
+        counter += 1
+    if counter > 9 or counter < 9:
+        return False
+    else:
+        return formed_enn
+
+def check_bik(bik):
+    formed_bik = ''
+    for i in bik:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_bik += i
+    counter = 0
+    for i_1 in formed_bik:
+        counter += 1
+    if counter > 9 or counter < 9:
+        return False
+    else:
+        return formed_bik
+def check_phone_num(phone):
+    formed_number = ''
+    for i in phone:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_number += i
+    counter = 0
+    for i_1 in formed_number:
+        counter += 1
+    if counter > 10 or counter < 10:
+        return False
+    else:
+        return formed_number
+
+
+def check_index(index):
+    formed_index = ''
+    for i in index:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_index += i
+    return formed_index
+
+def check_bank_account(account):
+    formed_account = ''
+    for i in account:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_account += i
+    counter = 0
+    for _ in formed_account:
+        counter += 1
+    if counter == 20:
+        return formed_account
+    else:
+        print("Был введён неверный формат счёта, пожалуйста попробуйте снова.")
+        return False
+def check_ogrnip(ogrnip):
+    formed_ogrnip = ''
+    counter = 0
+    for i in ogrnip:
+        flag = True
+        try:
+            int(i)
+        except ValueError:
+            flag = False
+        if flag:
+            formed_ogrnip += i
+    for _ in formed_ogrnip:
+        counter += 1
+    if counter == 15:
+        return formed_ogrnip
+    else:
+        print("Пожалуйста введите полный ОГРНИП - 15 чисел")
+        return False
+
+def general_info_user(n_parameter, a_parameter, ph_parameter, e_parameter, i_parameter, post_0_parameter, post_index_parameter):
+    print(SEPARATOR)
+    print('Имя:    ', n_parameter)
+    if 11 <= a_parameter % 100 <= 19:
+        years_parameter = 'лет'
+    elif a_parameter % 10 == 1:
+        years_parameter = 'год'
+    elif 2 <= a_parameter % 10 <= 4:
+        years_parameter = 'года'
+    else:
+        years_parameter = 'лет'
+
+    print('Возраст:', a_parameter, years_parameter)
+    print('Телефон:', ph_parameter)
+    print('E-mail: ', e_parameter)
+    print('Индекс: ', post_index_parameter)
+    print("Адрес: ", post_0_parameter)
+    if i:
+        print('')
+        print('Дополнительная информация:')
+        print(i_parameter)
+def input_specified_info():
+    ogrnip = input("Введите свой ОГРНИП: ")
+    while not check_ogrnip(ogrnip):
+        ogrnip = input("Введите свой ОГРНИП: ")
+    ogrnip = check_ogrnip(ogrnip)
+    enn = input("Введите свой ИНН: ")
+    while not check_enn(enn):
+        print('Неверный формат ИНН!')
+        enn = input("Введите свой ИНН: ")
+    enn = check_enn(enn)
+    bank_account = input("Введите свой расчётный счёт: ")
+    while not check_bank_account(bank_account):
+        bank_account = input("Введите свой расчётный счёт: ")
+    bank_account = check_bank_account(bank_account)
+    bank_name = input("Введите название вашего банка: ")
+    bik = input("Введите ваш БИК: ")
+    while not check_bik(bik):
+        print('Неверный формат БИК!')
+        bik = input("Введите ваш БИК: ")
+    bik = check_bik(bik)
+    bank_account_2 = input("Введите свой корреспондентский счёт: ")
+    while not check_bank_account(bank_account_2):
+        bank_account_2 = input("Введите свой корреспондентский счёт: ")
+    bank_account_2 = check_bank_account(bank_account_2)
+    sub_menu_1()
+
+def input_general_info():
+    n = input('Введите имя: ')
+    while 1:
+        # validate user age
+        a = input('Введите возраст: ')
+        a = check_age(a)
+        a = int(a)
+        if a > 0:
+            break
+        print('Возраст должен быть положительным')
+    uph = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
+    while not check_phone_num(uph):
+        print("Неверный формат номера телефона!")
+        uph = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
+    ph = ''
+    for ch in uph:
+        if ch == '+' or ('0' <= ch <= '9'):
+            ph += ch
+    sub_menu_1()
+
+def sub_menu_1():
+    print(SEPARATOR)
+    print('ВВЕСТИ ИЛИ ОБНОВИТЬ ИНФОРМАЦИЮ')
+    print('1 - Общая информация')
+    print('2 - Информация о предпринимателе')
+    print('0 - Назад')
+
+    option = int(input('Введите номер пункта меню: '))
+    option = int(input('Введите номер пункта меню: '))
+    if option == 0:
+        main_menu()
+    elif option == 1:
+        input_general_info()
+    elif option == 2:
+        input_specified_info()
+    else:
+        main_menu()
+def sub_menu_2():
+    print(SEPARATOR)
+    print('ВЫВЕСТИ ИНФОРМАЦИЮ')
+    print('1 - Общая информация')
+    print('2 - Вся информация')
+    print('0 - Назад')
+
+    option = int(input('Введите номер пункта меню: '))
+    while True:
+        if option == 0:
+            break
+        elif option == 1:
+            general_info_user(n, a, ph, e, i, post_0, post_index)
+            break
+        elif option == 2:
+            general_info_user(n, a, ph, e, i, post_0, post_index)
+            # probably will need to create a function for revealing the specified information
+            print("")
+            print("Информация о предпринимателе:")
+            print('ОГРНИП:', ogrnip)
+            print('ИНН:', enn)
+            print("Банковские реквизиты:")
+            print('Р/с:', bank_account)
+            print('Банк:', bank_name)
+            print('БИК:', bik)
+            print('К/с:', bank_account)
+            break
+        else:
+            print('Введите корректный пункт меню')
+    if option == 0:
+        main_menu()
+    else:
+        sub_menu_2()
+
+def main_menu():
+    print(SEPARATOR)
+    print('ГЛАВНОЕ МЕНЮ')
+    print('1 - Ввести или обновить информацию')
+    print('2 - Вывести информацию')
+    print('0 - Завершить работу')
+
+    option = int(input('Введите номер пункта меню: '))
+    while True:
+        if option == 0:
+            print("Выхожу из программы...")
+            break
+        elif option == 1:
+            break
+        elif option == 2:
+            break
+        else:
+            print("Введите корректный пункт меню")
+    if option == 1:
+        sub_menu_1()
+    elif option == 2:
+        sub_menu_2()
+
+
+
+print('Приложение MyProfile для предпринимателей ')
+print('Сохраняй информацию о себе и выводи ее в разных форматах')
+main_menu()
+
+while True:
+    # main menu
+    print(SEPARATOR)
+    print('ГЛАВНОЕ МЕНЮ')
+    print('1 - Ввести или обновить информацию')
+    print('2 - Вывести информацию')
+    print('0 - Завершить работу')
+
+    option = int(input('Введите номер пункта меню: '))
+    if option == 0:
+        break
+
+    if option == 1:
+        # submenu 1: edit info
+        while True:
+            print(SEPARATOR)
+            print('ВВЕСТИ ИЛИ ОБНОВИТЬ ИНФОРМАЦИЮ')
+            print('1 - Общая информация')
+            print('2 - Информация о предпринимателе')
+            print('0 - Назад')
+
+            option2 = int(input('Введите номер пункта меню: '))
+            if option2 == 0:
+                break
+            if option2 == 1:
+                # input general info
+                n = input('Введите имя: ')
+                while 1:
+                    # validate user age
+                    a = input('Введите возраст: ')
+                    a = check_age(a)
+                    a = int(a)
+                    if a > 0:
+                        break
+                uph = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
+                while not check_phone_num(uph):
+                    print("Неверный формат номера телефона!")
+                    uph = input('Введите номер телефона (+7ХХХХХХХХХХ): ')
+                ph = ''
+                for ch in uph:
+                    if ch == '+' or ('0' <= ch <= '9'):
+                        ph += ch
+
+                e = input('Введите адрес электронной почты: ')
+                post_index = input("Введите ваш почтовый индекс: ")
+                post_index = check_index(post_index)
+                post_0 = input("Введите вашу почтовый адресс (без индекса): ")
+                i = input('Введите дополнительную информацию:\n')
+            elif option2 == 2:
+                # input specified info
+                while True:
+                    ogrnip = input("Введите свой ОГРНИП: ")
+                    while not check_ogrnip(ogrnip):
+                        ogrnip = input("Введите свой ОГРНИП: ")
+                    ogrnip = check_ogrnip(ogrnip)
+                    enn = input("Введите свой ИНН: ")
+                    while not check_enn(enn):
+                        print('Неверный формат ИНН!')
+                        enn = input("Введите свой ИНН: ")
+                    enn = check_enn(enn)
+                    bank_account = input("Введите свой расчётный счёт: ")
+                    while not check_bank_account(bank_account):
+                        bank_account = input("Введите свой расчётный счёт: ")
+                    bank_account = check_bank_account(bank_account)
+                    bank_name = input("Введите название вашего банка: ")
+                    bik = input("Введите ваш БИК: ")
+                    while not check_bik(bik):
+                        print('Неверный формат БИК!')
+                        bik = input("Введите ваш БИК: ")
+                    bik = check_bik(bik)
+                    bank_account_2 = input("Введите свой корреспондентский счёт: ")
+                    while not check_bank_account(bank_account_2):
+                        bank_account_2 = input("Введите свой корреспондентский счёт: ")
+                    bank_account_2 = check_bank_account(bank_account_2)
+                    break
+
+            else:
+                print('Введите корректный пункт меню')
+    elif option == 2:
+        # submenu 2: print info
+        while True:
+            print(SEPARATOR)
+            print('ВЫВЕСТИ ИНФОРМАЦИЮ')
+            print('1 - Общая информация')
+            print('2 - Вся информация')
+            print('0 - Назад')
+
+            option2 = int(input('Введите номер пункта меню: '))
+            if option2 == 0:
+                break
+            if option2 == 1:
+                general_info_user(n, a, ph, e, i, post_0, post_index)
+            elif option2 == 2:
+                general_info_user(n, a, ph, e, i, post_0, post_index)
+                print("")
+                print("Информация о предпринимателе:")
+                print('ОГРНИП:', ogrnip)
+                print('ИНН:', enn)
+                print("Банковские реквизиты:")
+                print('Р/с:', bank_account)
+                print('Банк:', bank_name)
+                print('БИК:', bik)
+                print('К/с:', bank_account)
+            else:
+                print('Введите корректный пункт меню')
+    else:
+        print('Введите корректный пункт меню')
