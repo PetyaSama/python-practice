@@ -688,6 +688,91 @@ print("Sorted line of pupils:", line_resolved)
 
 -----------------------------------------------------------------------------------------
 
+left = int(input("Enter the left number: "))
+right = int(input("Enter the right number: "))
+
+
+first_list = [x ** 2 for x in range(left, right + 1)]
+second_list = [x ** 3 for x in range(left, right + 1)]
+
+print(first_list)
+print(second_list)
+
+-----------------------------------------------------------------------------------------
+
+text = input("Enter a word: ")
+symbol = input("Input a symbol: ")
+
+first = [x * 2 for x in text]
+second = [x * 2 + symbol for x in text]
+
+print(first)
+print(second)
+
+-----------------------------------------------------------------------------------------
+
+first_num = int(input("Enter the first number: "))
+second_num = int(input("Enter the second number: "))
+
+first_list = [x for x in range(first_num, second_num + 1) if x % 2 == 0]
+second_list = [y for y in range(first_num, second_num + 1) if y % 2 != 0]
+
+print(first_list)
+print(second_list)
+
+-----------------------------------------------------------------------------------------
+
+original_prices = [1.25, -9.45, 10.22, 3.78, -5.92, 1.16]
+
+new_list = [(x if x > 0 else 0) for x in original_prices]
+
+print(new_list)
+
+-----------------------------------------------------------------------------------------
+
+import random
+original_prices = []
+for i in range(0,5):
+    n = random.randint(-10, 10)
+    original_prices.append(n)
+print(original_prices)
+
+new_prices = original_prices[:]
+
+for i in range(len(original_prices)):
+
+    if not new_prices[i] > 0:
+
+        new_prices[i] = 0
+
+print("Мы потеряли: ",  sum(original_prices) - sum(new_prices))
+
+-----------------------------------------------------------------------------------------
+
+nums = [48, -10, 9, 38, 17, 50, -5, 43, 46, 12]
+
+print(nums[:6])
+print(nums[:-2])
+print(nums[::2])
+print(nums[1::2])
+print(nums[::-1])
+print(nums[-1::-2])
+
+-----------------------------------------------------------------------------------------
+
+nums = [48, -10, 9, 38, 17, 50, -5, 43, 46, 12]
+
+a = int(input("Enter A: "))
+b = int(input("Enter B: "))
+
+del nums[a:b]
+
+print(nums)
+
+-----------------------------------------------------------------------------------------
+
+
+
 
 
 
