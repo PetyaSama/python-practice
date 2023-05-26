@@ -850,6 +850,65 @@ for _ in range(repeat):
 
 -----------------------------------------------------------------------------------------
 
+words = ['apple', 'duck', 'orange']
+
+text = input("Enter your text here: ")
+counter = 0
+
+while True:
+    for i in range(len(words)):
+        if words[i] in text:
+            counter += 1
+    break
+
+print("The amount of the upper mentioned words is:", counter)
+
+-----------------------------------------------------------------------------------------
+
+text = input("Enter your text: ")
+
+text = text.split()
+text = ' '.join(text)
+
+print(text)
+
+-----------------------------------------------------------------------------------------
+
+while True:
+    text = input("Enter the path to your file: ")
+    if text != "":
+        break
+    else:
+        print("Please enter a path")
+
+if not text.startswith("C:"):
+    print("Wrong location of the disk!")
+else:
+    if not text.endswith(".txt"):
+        print("There is no such file on the C: disk")
+    else:
+        print("File located!")
+
+-----------------------------------------------------------------------------------------
+text = input("Enter your text: ")
+counter_l = 0
+counter_u = 0
+
+for i in text:
+    if i.islower():
+        counter_l += 1
+    elif i.isupper():
+        counter_u += 1
+
+if counter_u > counter_l:
+    print(text.upper())
+elif counter_l > counter_u:
+    print(text.lower())
+else:
+    print(text)
+-----------------------------------------------------------------------------------------
+
+
 
 
 
