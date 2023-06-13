@@ -932,6 +932,87 @@ for i in phone_book:
 
 -----------------------------------------------------------------------------------------
 
+order = {'apple': 2,
+         'banana': 3,
+         'pear': 1,
+         'watermelon': 10,
+         'chocolate': 5}
+
+incomes = {
+    'apple': 5600.20,
+    'orange': 3500.45,
+    'banana': 5000.00,
+    'bergamot': 3700.56,
+    'durian': 5987.23,
+    'grapefruit': 300.40,
+    'peach': 10000.50,
+    'pear': 1020.00,
+    'persimmon': 310.00,
+
+}
+
+for p in order.keys():
+    if incomes.get(p):
+        print(p, "-", incomes[p])
+
+total = 0
+for i in order.keys():
+    for j in incomes.keys():
+        if j == i:
+            total += order[i] * incomes[j]
+
+print(total)
+
+-----------------------------------------------------------------------------------------
+
+players_dict = {
+    1: {'name': 'Vanya', 'team': 'A', 'status': 'Rest'},
+    2: {'name': 'Lena', 'team': 'B', 'status': 'Training'},
+    3: {'name': 'Maxim', 'team': 'C', 'status': 'Travel'},
+    4: {'name': 'Egor', 'team': 'C', 'status': 'Rest'},
+    5: {'name': 'Andrei', 'team': 'A', 'status': 'Training'},
+    6: {'name': 'Sasha', 'team': 'A', 'status': 'Rest'},
+    7: {'name': 'Alina', 'team': 'B', 'status': 'Rest'},
+    8: {'name': 'Masha', 'team': 'C', 'status': 'Travel'}
+
+}
+
+team_a_player = [
+    player["name"] for player in players_dict.values() if player["team"] == "A" and player["status"] == "Rest"
+]
+
+print(team_a_player)
+
+-----------------------------------------------------------------------------------------
+
+text = input("Enter the line of text: ")
+text_elem = set(text)
+symbols = set('.,;:!?')
+counter = 0
+for i in text_elem:
+    if i in symbols:
+        counter += 1
+print("The line of text contains:", counter, "symbols from the symbols")
+
+-----------------------------------------------------------------------------------------
+
+nums_1 = [29, 17, 10, 15, 13, 22, 12, 22, 7, 24, 26, 3, 11, 2, 3, 16, 19, 21, 2, 3, 8, 27, 2, 17, 2, 20, 12, 21, 3, 1]
+
+nums_2 = [16, 21, 30, 24, 5, 7, 23, 13, 11, 5, 21, 5, 19, 9, 12, 9, 15, 16, 29, 8, 16, 1, 22, 15, 16, 9, 1, 13, 21, 21]
+
+nums_1_o = set(nums_1[:])
+nums_2_o = set(nums_2[:])
+
+print(nums_1_o.union(nums_2_o))
+print(nums_1_o.intersection(nums_2_o))
+print(nums_1_o.difference(nums_2_o))
+
+-----------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
