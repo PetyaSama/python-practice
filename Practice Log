@@ -1009,6 +1009,106 @@ print(nums_1_o.difference(nums_2_o))
 
 -----------------------------------------------------------------------------------------
 
+goods = {
+    'Лампа': '12345',
+    'Стол': '23456',
+    'Диван': '34567',
+    'Стул': '45678',
+}
+
+store = {
+    '12345': [
+        {'quantity': 27, 'price': 42},
+    ],
+    '23456': [
+        {'quantity': 22, 'price': 510},
+        {'quantity': 32, 'price': 520},
+    ],
+    '34567': [
+        {'quantity': 2, 'price': 1200},
+        {'quantity': 1, 'price': 1150},
+    ],
+    '45678': [
+        {'quantity': 50, 'price': 100},
+        {'quantity': 12, 'price': 95},
+        {'quantity': 43, 'price': 97},
+    ],
+}
+
+for i in goods:
+    for j in store[goods[i]]:
+        j["price"] = j["quantity"] * j["price"]
+
+total = dict()
+counter = 0
+for i in store.values():
+    counter += 1
+    total[counter] = {"total_quantity": 0, "total_price": 0}
+    for j in i:
+        total[counter]["total_quantity"] += j["quantity"]
+        total[counter]["total_price"] += j["price"]
+
+counter = 0
+for i in goods.keys():
+    counter += 1
+    print(i, "-", total[counter]["total_quantity"], "units, price:",
+          total[counter]["total_price"])
+
+-----------------------------------------------------------------------------------------
+
+text = input("Enter a line of text: ").lower()
+
+frequencies = dict()
+
+for i in text:
+    if i not in frequencies:
+        frequencies[i] = 1
+    else:
+        frequencies[i] += 1
+
+frequencies_reverse = dict()
+
+for k in text:
+    for i in frequencies.values():
+        if i not in frequencies_reverse:
+            frequencies_reverse[i] = []
+        else:
+            for j in frequencies:
+                if frequencies[j] == i and not j in frequencies_reverse[i]:
+                    frequencies_reverse[i].append(j)
+
+for i in frequencies_reverse:
+    print(i, ":", frequencies_reverse[i])
+
+-----------------------------------------------------------------------------------------
+
+amount_orders = int(input("Enter the amount of orders: "))
+saved_orders = dict()
+
+for i in range(1, amount_orders + 1):
+    order = input("Enter the order number {}: ".format(i))
+    order = order.split()
+    if order[0] not in saved_orders:
+        saved_orders[order[0]] = dict()
+        saved_orders[order[0]][order[1]] = int(order[2])
+    else:
+        saved_orders[order[0]][order[1]] += int(order[2])
+
+for i in saved_orders:
+    for j in saved_orders.values():
+        for k in j.keys():
+            print(i, ":")
+            print("     ", k, ":", j[k])
+    break
+
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 
