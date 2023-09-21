@@ -1150,6 +1150,176 @@ else:
 
 -----------------------------------------------------------------------------------------
 
+def add_contact(a_book):
+    print("Enter the name of the person you wish to add (Example: Kiril Vesely)")
+    name_in = input(" ")
+    name_in = tuple(name_in.split(" "))
+    if name_in in a_book:
+        print("This name is already registered, please select another name")
+        add_contact(a_book)
+    else:
+        print("Enter a phone number")
+        phone_in = input(" ")
+        a_book[name_in] = phone_in
+    return a_book
+
+
+def find_contact(f_book):
+    print("Enter the name of the person you wish to find (Example: Kiril Vesely)")
+    name_in = input(" ")
+    name_in = tuple(name_in.split(" "))
+    flag = False
+    for i_token, i_key in f_book.items():
+        if i_token == name_in or name_in[0] in i_token:
+            print(i_token, "phone number is:", i_key)
+            flag = True
+    if not flag:
+        print("Phone number not found. Do you wish to add it?")
+        user_in = input("(1 - Yes / Anything - No): ")
+        if user_in == "1":
+            add_contact(f_book)
+        else:
+            main(f_book)
+    if flag:
+        print("Do you wish to continue? (1 - Yes / Anything - No")
+        answer = input(" ")
+        if answer == "1":
+            main(f_book)
+        else:
+            print("Ending the program..")
+
+
+def main(p_book):
+    print("Please select an option: Option 1: Find a contact, Option 2: Add a contact, Anything else will end the "
+          "program")
+    print("Current phonebook is:", p_book)
+    user_in = input("Enter: ")
+    if user_in == "2":
+        add_contact(phone_book)
+        main(p_book)
+    elif user_in == "1":
+        find_contact(phone_book)
+    else:
+        print("Ending the program")
+
+
+phone_book = {('Ivan', 'Sidorov'): 7123123123,
+              ('Danya', 'Sidorov'): 7456456456,
+              ('Nastya', 'Ivanova'): 7089089089}
+
+main(phone_book)
+
+----------------------------------------------------------------------------------------------------------------------
+
+def neozip(t_uple_1, t_uple_2):
+    luple_1 = list(t_uple_1)
+    luple_2 = list(t_uple_2)
+    new_tupl = []
+    for i_index, i_object in enumerate(luple_1):
+        box = []
+        box.append(i_object)
+        if not luple_2.index(luple_2[-1]) - i_index < 0:
+            box.append(luple_2[i_index])
+            box = tuple(box)
+            new_tupl.append(box)
+    new_tupl = tuple(new_tupl)
+    return new_tupl
+
+
+a = (10, 20, 30, 40)
+b = ('a', 'b', 'c', 'd')
+
+print(neozip(a, b))
+
+----------------------------------------------------------------------------------------------
+def factorial(num):
+    if num == 1:
+        return 1
+    return num * factorial(num - 1)
+
+
+print(factorial(10))
+------------------------------------------------------------------------------------------------
+def power(a, n):
+    n -= 1
+    if n - 1 < 0:
+        return a
+    return a * power(a, n)
+
+
+float_num = float(input('Введите вещественное число: '))
+
+int_num = int(input('Введите степень числа: '))
+
+print(float_num, '**', int_num, '=', power(float_num, int_num))
+----------------------------------------------------------------------------------------------
+
+
+site = {
+    'html': {
+        'head': {
+            'title': 'Мой сайт'
+        },
+        'body': {
+            'h2': 'Здесь будет мой заголовок',
+            'div': 'Тут, наверное, какой-то блок',
+            'p': 'А вот здесь новый абзац'
+        }
+    }
+}
+
+def find_object(my_dict, key):
+    if key in my_dict:
+        return my_dict[key]
+
+    for sub_struct in my_dict.values():
+        if isinstance(sub_struct, dict):
+            result = find_object(sub_struct, key)
+            if result:
+                break
+    else:
+        result = None
+
+    return result
+-----------------------------------------------------------------------------------------------------
+
+def find_key(area, search_key, maximum=0):
+    if not maximum != 0:
+        if not maximum <= 0:
+            if search_key in area:
+                return search_key, area[search_key]
+            for i_object, i_value in area.values():
+                maximum -= 1
+                result = find_key(i_value, search_key, maximum)
+                if result:
+                    break
+        elif maximum <= 0:
+            return print("The maximum depth has been reached.")
+    if maximum is None:
+        if search_key in area:
+            return search_key, site[search_key]
+        for i_object, i_value in area.values():
+            result = find_key(i_value, search_key)
+            if result:
+                break
+    else:
+        return None
+
+
+key = input("Enter the initial key: ")
+depth = input("Would you like to enter the max depth? (Y/N): ")
+if depth == "Y" or depth == "y":
+    max_depth = int(input("Enter the max depth: "))
+else:
+    value = find_key(site, key)
+    if value:
+        print("The key's value:", value)
+    else:
+        print("There is no such key in the dictionary.")
+# It doesn't work
+--------------------------------------------------------------------------------------------------
+
+
 
 
 
